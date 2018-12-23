@@ -6,7 +6,13 @@ import json
 import pandas as pd
 from pandas_datareader import data as pdr
 
-todays_date = date.today()
+def prev_weekday(adate):
+    adate -= timedelta(days=1)
+    while adate.weekday() > 4: # Mon-Fri are 0-4
+        adate -= timedelta(days=1)
+    return adate
+
+todays_date = prev_weekday(date.today())
 
 app = Flask(__name__)
 
